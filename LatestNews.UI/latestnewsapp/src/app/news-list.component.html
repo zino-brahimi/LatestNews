@@ -1,0 +1,32 @@
+<div class="container mx-auto p-6">
+    <div class="mb-6 flex gap-2">
+        <input [(ngModel)]="searchSource" type="text" placeholder="Enter news source (e.g., cnn)"
+            class="border border-gray-300 rounded-lg px-4 py-2 w-full">
+        <button (click)="getNewsBySource()" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+            Search
+        </button>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div *ngFor="let news of newsItems" class="bg-white rounded-2xl shadow-lg p-4">
+            <img [src]="news.urlToImage || 'assets/placeholder.jpg'" alt="News Image"
+                class="w-full h-48 object-cover rounded-lg mb-4">
+            <h2 class="text-xl font-semibold">{{ news.title || "No Title" }}</h2>
+            <p class="text-gray-600 mt-2">{{ news.description || "No description available." }}</p>
+            <p class="text-sm text-gray-500 mt-2">Source: {{ news.source || "Unknown" }}</p>
+            <p class="text-xs text-gray-400">{{ news.publishedAt | date: 'medium' }}</p>
+            <a [href]="news.url" target="_blank" class="text-blue-500 hover:underline mt-2 block">Read more</a>
+        </div>
+    </div>
+
+    <div class="flex justify-center mt-6 space-x-4">
+        <button (click)="previousPage()" [disabled]="!hasPerviousPage"
+            class="px-4 py-2 bg-gray-300 rounded-lg disabled:opacity-50">
+            Previous
+        </button>
+        <button (click)="nextPage()" [disabled]="!hasNextPage"
+            class="px-4 py-2 bg-blue-500 text-white rounded-lg disabled:opacity-50">
+            Next
+        </button>
+    </div>
+</div>

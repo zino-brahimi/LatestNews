@@ -1,0 +1,6 @@
+@LatestNews.API_HostAddress = http://localhost:5005
+
+GET {{LatestNews.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
